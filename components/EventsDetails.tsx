@@ -1,56 +1,71 @@
 "use client";
-import { useState } from "react";
-import { useCart } from "../context/CartContext";
-import Link from "next/link";
 
-export default function EventDetails({
-  eventId,
-  name,
-  date,
-  price,
-  image = "/daoud-event-default.jpg",
-}: {
-  eventId: string;
+import React, { useState } from "react";
+import { useCart } from "@/context/CartContext";
+
+type Event = {
+  id: string;
   name: string;
   date: string;
   price: number;
-  image?: string;
-}) {
+  ticketsLeft: number;
+  image: string;
+  venue: string;
+  location: string;
+};
+
+export default function EventDetails({ event }: { event: Event }) {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
+  const handleAdd = () => {
+    addToCart({
+      eventId: event.id,
+      name: event.name,
+      price: event.price,
+      quantity,
+    });
+  };
+
+  const increase = () => {
+    if (quantity < event.ticketsLeft) setQuantity((q) => q + 1);
+  };
+
+  const decrease = () => {
+    if (quantity > 1) setQuantity((q) => q - 1);
+  };
+
   return (
-    <main className="min-h-screen px-6 py-12 bg-white text-black">
-      <div className="max-w-3xl mx-auto">
-        <img src={image} alt={name} className="w-full h-96 object-cover rounded mb-6" />
-        <h1 className="text-4xl font-bold mb-2">{name}</h1>
-        <p className="text-gray-600 mb-4">
-          {date} – {price} €
-        </p>
+    <div className="bg-white rounded-xl shadow-md p-6 max-w-3xl mx-auto mt-10 flex flex-col md:flex-row gap-6 items-center">
+      <img
+        src={event.image}
+        alt={event.name}
+        className="w-64 h-64 object-cover rounded-lg"
+      />
+      <div className="flex-1 text-center md:text-left">
+        <h1 className="text-2xl font-bold mb-2">{event.name}</h1>
+        <p className="text-gray-600 mb-1">{event.date}</p>
+        <p className="text-gray-600 mb-1">{event.venue}, {event.location}</p>
+        <p className="text-lg font-semibold mb-4">{event.price.toFixed(2)} €</p>
 
-        <div className="flex items-center gap-4 mb-6">
-          <button
-            className="text-xl px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-          >
-            -
-          </button>
-          <span className="text-xl w-8 text-center">{quantity}</span>
-          <button
-            className="text-xl px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-            onClick={() => setQuantity((q) => q + 1)}
-          >
-            +
-          </button>
-        </div>
-
-        <button
-          onClick={() => addToCart({ eventId, name, quantity, price })}
-          className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition"
-        >
-          Add {quantity} to Cart
-        </button>
+        {event.ticketsLeft > 0 ? (
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex items-center border rounded-lg overflow-hidden">
+              <button onClick={decrease} className="px-3 py-1 hover:bg-gray-100">−</button>
+              <span className="px-4">{quantity}</span>
+              <button onClick={increase} className="px-3 py-1 hover:bg-gray-100">+</button>
+            </div>
+            <button
+              onClick={handleAdd}
+              className="px-6 py-2 bg-black text-white rounded-lg hover:animate-jiggle"
+            >
+              Add to cart
+            </button>
+          </div>
+        ) : (
+          <p className="text-red-600 font-semibold">Sold out</p>
+        )}
       </div>
-    </main>
+    </div>
   );
 }
