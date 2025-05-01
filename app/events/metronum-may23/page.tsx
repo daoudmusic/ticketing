@@ -1,17 +1,22 @@
-// /app/events/metronum-may23/page.tsx – Metronum Event Detail
-import Link from "next/link";
+"use client";
+import EventDetails from "../../../components/EventDetails";
 
-export default function MetronumEvent() {
+export default function MetronumPage() {
   return (
-    <main className="min-h-screen px-6 py-12 bg-white text-black">
-      <div className="max-w-3xl mx-auto">
-        <img src="/daoud-event-default.jpg" alt="daoud metronum" className="w-full h-96 object-cover rounded mb-6" />
-        <h1 className="text-4xl font-bold mb-2">daoud live @ Le Metronum</h1>
-        <p className="text-gray-600 mb-4">May 23, 2025 – 15 €</p>
-        <Link href="/cart" className="inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition">
-          Buy Tickets
-        </Link>
+    <div className="min-h-screen bg-white text-black px-6 py-12">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <img
+          src="/daoud-event-default.jpg"
+          alt="daoud at Le Metronum"
+          className="w-full h-full object-cover aspect-square rounded"
+        />
+        <EventDetails
+          eventId="metronum-may23"
+          name="daoud live @ Le Metronum"
+          date="May 23, 2025"
+          price={15}
+        />
       </div>
-    </main>
+    </div>
   );
 }
