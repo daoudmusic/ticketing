@@ -1,8 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
 import Script from "next/script";
-import { CartProvider } from "../context/CartContext";
-import { useCart } from "../context/CartContext";
+import { CartProvider, useCart } from "../context/CartContext";
 
 export const metadata = {
   title: "daoud concerts – Buy Tickets Now",
@@ -14,14 +13,7 @@ function Header() {
   const cartItemCount = getTotalItems();
 
   return (
-    import Link from "next/link";
-import { useCart } from "../context/CartContext";
-
-export function Header() {
-  const { getTotalItems } = useCart();
-  const cartItemCount = getTotalItems();
-
-  return (<header className="w-full flex justify-between items-center px-6 py-4 border-b bg-white shadow-sm">
+    <header className="w-full flex justify-between items-center px-6 py-4 border-b bg-white shadow-sm">
       <Link href="/">
         <img
           src="/logo.png"
@@ -59,8 +51,6 @@ export function Header() {
   );
 }
 
-
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -71,4 +61,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fb_
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1555413468125784');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+      </head>
+      <body className="font-sans bg-white text-black min-h-screen flex flex-col">
+        <CartProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <footer className="p-6 text-center text-xs text-gray-500">
+            <img src="/logo.png" alt="daoud footer logo" className="mx-auto mb-2 h-6" />
+            © 2025 daoud concerts. All rights reserved.
+          </footer>
+        </CartProvider>
+      </body>
+    </html>
+  );
+}
