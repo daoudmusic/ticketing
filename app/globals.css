@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@keyframes jiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+button:hover,
+a:hover {
+  animation: jiggle 0.3s ease-in-out infinite;
+}
+
 
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
