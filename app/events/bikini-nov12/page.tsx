@@ -1,17 +1,22 @@
-// /app/events/bikini-nov12/page.tsx – Bikini Event Detail
-import Link from "next/link";
+"use client";
+import EventDetails from "../../../components/EventDetails";
 
-export default function BikiniEvent() {
+export default function BikiniPage() {
   return (
-    <main className="min-h-screen px-6 py-12 bg-white text-black">
-      <div className="max-w-3xl mx-auto">
-        <img src="/daoud-event-default.jpg" alt="daoud bikini" className="w-full h-96 object-cover rounded mb-6" />
-        <h1 className="text-4xl font-bold mb-2">daoud live @ Le Bikini</h1>
-        <p className="text-gray-600 mb-4">November 12, 2025 – 20 €</p>
-        <Link href="/cart" className="inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition">
-          Buy Tickets
-        </Link>
+    <div className="min-h-screen bg-white text-black px-6 py-12">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <img
+          src="/daoud-event-default.jpg"
+          alt="daoud at Le Bikini"
+          className="w-full h-full object-cover aspect-square rounded"
+        />
+        <EventDetails
+          eventId="bikini-nov12"
+          name="daoud live @ Le Bikini"
+          date="November 12, 2025"
+          price={20}
+        />
       </div>
-    </main>
+    </div>
   );
 }
