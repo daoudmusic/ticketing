@@ -14,9 +14,20 @@ function Header() {
   const cartItemCount = getTotalItems();
 
   return (
-    <header className="w-full flex justify-between items-center px-6 py-4 border-b bg-white shadow-sm">
+    import Link from "next/link";
+import { useCart } from "../context/CartContext";
+
+export function Header() {
+  const { getTotalItems } = useCart();
+  const cartItemCount = getTotalItems();
+
+  return (<header className="w-full flex justify-between items-center px-6 py-4 border-b bg-white shadow-sm">
       <Link href="/">
-        <img src="/logo.png" alt="daoud concerts" className="h-10" />
+        <img
+          src="/logo.png"
+          alt="daoud concerts"
+          className="h-10 w-auto cursor-pointer"
+        />
       </Link>
       <nav className="flex gap-6 text-sm items-center">
         <Link href="/about">About</Link>
@@ -47,6 +58,8 @@ function Header() {
     </header>
   );
 }
+
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
