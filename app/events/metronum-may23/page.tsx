@@ -1,4 +1,4 @@
-import EventDetails from "@/components/EventDetails";
+import EventDetails from "@/components/EventDetails.tsx";
 
 export default function MetronumEventPage() {
   const event = {
