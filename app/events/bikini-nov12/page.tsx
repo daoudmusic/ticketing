@@ -1,4 +1,4 @@
-import EventDetails from '@/components/EventDetails'; // adjust as necessary
+import EventDetails from '@/components/EventDetails.tsx'; // adjust as necessary
 
 
 export default function BikiniEventPage() {
