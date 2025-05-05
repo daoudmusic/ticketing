@@ -1,4 +1,5 @@
-import EventDetails from "@/components/EventDetails";
+import EventDetails from 'ticketing/components/EventDetails'; // adjust as necessary
+
 
 export default function BikiniEventPage() {
   const event = {
